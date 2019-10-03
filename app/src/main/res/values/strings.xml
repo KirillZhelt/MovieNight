@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Academy Minsk Movies</string>
+    <string name="woopdidiscoop">Woopdidiscoop!</string>
+    <string name="title_activity_second">SecondActivity</string>
+    <string name="go_to_url">Go to URL</string>
+    <string name="header_image_description">Header image</string>
+    <string name="film_poster_description">Film poster</string>
+    <string name="avengers_title">Avengers: Endgame</string>
+    <string name="released">Released:</string>
+    <string name="avengers_release_date">April 22, 2019</string>
+    <string name="movie_trailer">MOVIE TRAILER</string>
+    <string name="overview">Overview:</string>
+    <string name="avengers_description">After the devastating events of Avengers: Infinity War, the universe is in ruins
+        due to the efforts of the Mad Titan, Thanos. With the help of remaining allies, the Avengers must assemble once
+        more in order to undo Thanos\' actions and restore order to the universe once and for all, no matter what
+        consequences may be in store.
+    </string>
+    <string name="jurassic_world_title">Jurassic World</string>
+    <string name="jurassic_park_description">Twenty-two years after the original Jurassic Park failed, the new park, also known as Jurassic World, is open for business. After years of studying genetics, the scientists on the park genetically engineer a new breed of dinosaur, the Indominus Rex. When everything goes horribly wrong, will our heroes make it off the island?</string>
+    <string name="the_meg_title">The Meg</string>
+    <string name="the_meg_description">Rescue diver Jonas Taylor is attempting to save the crew of a damaged nuclear submarine when he sees the hull of the sub being rammed by a giant creature. Two of his crew are trapped in the damaged sub; Taylor is forced to flee, realizing that attempting rescue would result in the death of everyone on the deep-submergence rescue vehicle. Moments later, the nuclear sub explodes. Taylor\'s account of the story is dismissed by fellow survivor Dr. Heller, who believes that Taylor turned coward due to pressure-induced psychosis.</string>
+    <string name="the_first_purge_title">The First Purge</string>
+    <string name="the_first_purge_description">America\'s third political party, the New Founding Fathers of America, comes to power and conducts an experiment: no laws for 12 hours on Staten Island. No one has to stay on the island, but $5,000 is given to anyone who does.</string>
+    <string name="deadpool2_title">Deadpool 2</string>
+    <string name="deadpool2_description">Foul-mouthed mutant mercenary Wade Wilson (AKA. Deadpool), brings together a team of fellow mutant rogues to protect a young boy with supernatural abilities from the brutal, time-traveling cyborg, Cable.</string>
+    <string name="black_panther_title">Black Panther</string>
+    <string name="black_panther_description">After the events of Captain America: Civil War, Prince T\'Challa returns home to the reclusive, technologically advanced African nation of Wakanda to serve as his country\'s new king. However, T\'Challa soon finds that he is challenged for the throne from factions within his own country. When two foes conspire to destroy Wakanda, the hero known as Black Panther must team up with C.I.A. agent Everett K. Ross and members of the Dora Milaje, Wakandan special forces, to prevent Wakanda from being dragged into a world war.</string>
+    <string name="oceans_eight_title">Ocean\'s Eight</string>
+    <string name="oceans_eight_description">Debbie Ocean gathers an all-female crew to attempt an impossible heist at New York City\'s yearly Met Gala.</string>
+    <string name="interstellar_title">Interstellar</string>
+    <string name="interstellar_description">Earth\'s future has been riddled by disasters, famines, and droughts. There is only one way to ensure mankind\'s survival: Interstellar travel. A newly discovered wormhole in the far reaches of our solar system allows a team of astronauts to go where no man has gone before, a planet that may have the right environment to sustain human life.</string>
+    <string name="thor_ragnarok_title">Thor - Ragnarok</string>
+    <string name="thor_ragnarok_description">Thor (Chris Hemsworth) is imprisoned on the other side of the universe and finds himself in a race against time to get back to Asgard to stop Ragnarök, the destruction of his homeworld and the end of Asgardian civilization, at the hands of an all-powerful new threat, the ruthless Hela (Cate Blanchett).</string>
+    <string name="guardians_of_the_galaxy_title">Guardians Of The Galaxy</string>
+    <string name="guardians_of_the_galaxy_description">he Guardians struggle to keep together as a team while dealing with their personal family issues, notably Star-Lord\'s encounter with his father the ambitious celestial being Ego.</string>
+</resources>
