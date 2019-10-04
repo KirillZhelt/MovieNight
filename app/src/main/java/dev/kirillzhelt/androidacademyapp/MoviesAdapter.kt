@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import dev.kirillzhelt.androidacademyapp.model.Film
+import dev.kirillzhelt.androidacademyapp.model.Movie
 
-class MoviesAdapter(private val context: Context, private val films: List<Film>): RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class MoviesAdapter(private val context: Context, private val movies: List<Movie>): RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     private val inflater = LayoutInflater.from(context)
 
@@ -18,24 +18,24 @@ class MoviesAdapter(private val context: Context, private val films: List<Film>)
     }
 
     override fun getItemCount(): Int {
-        return films.size
+        return movies.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(context, films[position])
+        holder.bind(context, movies[position])
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        private val filmPosterImageView: ImageView = itemView.findViewById(R.id.film_poster_iv)
-        private val filmTitleTextView: TextView = itemView.findViewById(R.id.film_title_tv)
-        private val filmDescriptionTextView: TextView = itemView.findViewById(R.id.film_description_tv)
+        private val moviePosterImageView: ImageView = itemView.findViewById(R.id.movie_poster_iv)
+        private val movieTitleTextView: TextView = itemView.findViewById(R.id.movie_title_tv)
+        private val movieDescriptionTextView: TextView = itemView.findViewById(R.id.movie_description_tv)
 
-        fun bind(context: Context, film: Film) {
+        fun bind(context: Context, movie: Movie) {
             // TODO: load images from the internet
-            filmPosterImageView.setImageDrawable(context.resources.getDrawable(R.drawable.black_panther_poster))
+            moviePosterImageView.setImageDrawable(context.resources.getDrawable(R.drawable.black_panther_poster))
 
-            filmTitleTextView.text = film.filmTitle
-            filmDescriptionTextView.text = film.filmDescription
+            movieTitleTextView.text = movie.movieTitle
+            movieDescriptionTextView.text = movie.movieDescription
         }
     }
 }
