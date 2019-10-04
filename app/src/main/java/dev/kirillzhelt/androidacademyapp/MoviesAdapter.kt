@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import dev.kirillzhelt.androidacademyapp.model.Movie
 
-class MoviesAdapter(private val context: Context, private val movies: List<Movie>): RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class MoviesAdapter(context: Context, private val movies: List<Movie>): RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     private val inflater = LayoutInflater.from(context)
 
@@ -22,7 +23,7 @@ class MoviesAdapter(private val context: Context, private val movies: List<Movie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(context, movies[position])
+        holder.bind(movies[position])
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -30,9 +31,8 @@ class MoviesAdapter(private val context: Context, private val movies: List<Movie
         private val movieTitleTextView: TextView = itemView.findViewById(R.id.movie_title_tv)
         private val movieDescriptionTextView: TextView = itemView.findViewById(R.id.movie_description_tv)
 
-        fun bind(context: Context, movie: Movie) {
-            // TODO: load images from the internet
-            moviePosterImageView.setImageDrawable(context.resources.getDrawable(R.drawable.black_panther_poster))
+        fun bind(movie: Movie) {
+            Picasso.get().load(movie.moviePosterURL).placeholder(R.drawable.movie_poster_placeholder).into(moviePosterImageView)
 
             movieTitleTextView.text = movie.movieTitle
             movieDescriptionTextView.text = movie.movieDescription

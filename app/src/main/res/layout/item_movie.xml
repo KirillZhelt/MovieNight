@@ -14,7 +14,7 @@
             android:adjustViewBounds="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/deadpool2_poster" />
+            tools:srcCompat="@drawable/deadpool2_poster" />
 
     <TextView
             android:id="@+id/movie_title_tv"
