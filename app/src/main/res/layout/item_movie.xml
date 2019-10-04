@@ -6,7 +6,7 @@
         android:layout_height="@dimen/item_movie_row_height">
 
     <ImageView
-            android:id="@+id/film_poster_iv"
+            android:id="@+id/movie_poster_iv"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/film_poster_height"
             android:layout_marginStart="@dimen/default_margin"
@@ -14,10 +14,10 @@
             android:adjustViewBounds="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/deadpool2_poster" />
+            tools:srcCompat="@drawable/deadpool2_poster" />
 
     <TextView
-            android:id="@+id/film_title_tv"
+            android:id="@+id/movie_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin"
@@ -25,11 +25,11 @@
             android:text="@string/deadpool2_title"
             android:textColor="@android:color/black"
             android:textSize="@dimen/film_title_text_size"
-            app:layout_constraintStart_toEndOf="@+id/film_poster_iv"
+            app:layout_constraintStart_toEndOf="@+id/movie_poster_iv"
             app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-            android:id="@+id/film_description_tv"
+            android:id="@+id/movie_description_tv"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/default_margin"
@@ -42,7 +42,7 @@
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/film_poster_iv"
-            app:layout_constraintTop_toBottomOf="@+id/film_title_tv" />
+            app:layout_constraintStart_toEndOf="@+id/movie_poster_iv"
+            app:layout_constraintTop_toBottomOf="@+id/movie_title_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
