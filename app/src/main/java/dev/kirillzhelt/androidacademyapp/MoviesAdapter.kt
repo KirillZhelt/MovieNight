@@ -1,6 +1,7 @@
 package dev.kirillzhelt.androidacademyapp
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -8,18 +9,20 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import dev.kirillzhelt.androidacademyapp.model.Film
 
-class MoviesAdapter(context: Context, private val films: List<Film>): RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class MoviesAdapter(private val context: Context, private val films: List<Film>): RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+
+    private val inflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return ViewHolder(inflater.inflate(R.layout.item_movie, parent, false))
     }
 
     override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return films.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        holder.bind(context, films[position])
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -34,6 +37,5 @@ class MoviesAdapter(context: Context, private val films: List<Film>): RecyclerVi
             filmTitleTextView.text = film.filmTitle
             filmDescriptionTextView.text = film.filmDescription
         }
-
     }
 }
