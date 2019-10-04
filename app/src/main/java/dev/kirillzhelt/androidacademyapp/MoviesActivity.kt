@@ -2,6 +2,7 @@ package dev.kirillzhelt.androidacademyapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import dev.kirillzhelt.androidacademyapp.model.Repository
 
@@ -15,7 +16,11 @@ class MoviesActivity : AppCompatActivity() {
 
         repository = Repository()
 
+        val movies = repository.loadMovies()
+
         val moviesRecyclerView: RecyclerView = findViewById(R.id.movies_rv)
-        moviesRecyclerView.adapter = MoviesAdapter(this, repository.loadMovies())
+        moviesRecyclerView.adapter = MoviesAdapter(this, repository.loadMovies()) { position ->
+            Toast.makeText(this, movies[position].movieTitle, Toast.LENGTH_SHORT).show()
+        }
     }
 }

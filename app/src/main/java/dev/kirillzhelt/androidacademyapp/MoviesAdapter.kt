@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import dev.kirillzhelt.androidacademyapp.model.Movie
 
-class MoviesAdapter(context: Context, private val movies: List<Movie>): RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class MoviesAdapter(context: Context, private val movies: List<Movie>, private val onClickListener: (position: Int) -> Unit): RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     private val inflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(inflater.inflate(R.layout.item_movie, parent, false))
+        return ViewHolder(inflater.inflate(R.layout.item_movie, parent, false), onClickListener)
     }
 
     override fun getItemCount(): Int {
@@ -26,10 +26,18 @@ class MoviesAdapter(context: Context, private val movies: List<Movie>): Recycler
         holder.bind(movies[position])
     }
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, onClickListener: (position: Int) -> Unit): RecyclerView.ViewHolder(itemView) {
         private val moviePosterImageView: ImageView = itemView.findViewById(R.id.movie_poster_iv)
         private val movieTitleTextView: TextView = itemView.findViewById(R.id.movie_title_tv)
         private val movieDescriptionTextView: TextView = itemView.findViewById(R.id.movie_description_tv)
+
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION)
+                    onClickListener(position)
+            }
+        }
 
         fun bind(movie: Movie) {
             Picasso.get().load(movie.moviePosterURL).placeholder(R.drawable.movie_poster_placeholder).into(moviePosterImageView)
@@ -37,5 +45,7 @@ class MoviesAdapter(context: Context, private val movies: List<Movie>): Recycler
             movieTitleTextView.text = movie.movieTitle
             movieDescriptionTextView.text = movie.movieDescription
         }
+
+
     }
 }
