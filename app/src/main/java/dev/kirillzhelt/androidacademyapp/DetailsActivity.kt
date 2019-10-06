@@ -1,19 +1,17 @@
 package dev.kirillzhelt.androidacademyapp
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import dev.kirillzhelt.androidacademyapp.model.Movie
 
 class DetailsActivity : AppCompatActivity() {
 
     private lateinit var movieTrailerButton: Button
-
-    companion object {
-        const val TRAILER_YOUTUBE_ID = "6ZfuNTqbHE8"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,5 +32,17 @@ class DetailsActivity : AppCompatActivity() {
             startActivity(webIntent)
         }
 
+    }
+
+    companion object {
+        const val TRAILER_YOUTUBE_ID = "6ZfuNTqbHE8"
+        const val ARGS_MOVIE = "ARGS_MOVIE"
+
+        fun createIntent(context: Context, movie: Movie) : Intent {
+            val intent = Intent(context, this::class.java)
+            intent.putExtra(ARGS_MOVIE, movie)
+
+            return intent
+        }
     }
 }
