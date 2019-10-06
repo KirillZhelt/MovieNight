@@ -27,9 +27,9 @@ class MoviesAdapter(context: Context, private val movies: List<Movie>, private v
     }
 
     class ViewHolder(itemView: View, onClickListener: (position: Int) -> Unit): RecyclerView.ViewHolder(itemView) {
-        private val moviePosterImageView: ImageView = itemView.findViewById(R.id.movie_poster_iv)
-        private val movieTitleTextView: TextView = itemView.findViewById(R.id.movie_title_tv)
-        private val movieDescriptionTextView: TextView = itemView.findViewById(R.id.movie_description_tv)
+        private val moviePosterImageView: ImageView = itemView.findViewById(R.id.movies_movie_poster_iv)
+        private val movieTitleTextView: TextView = itemView.findViewById(R.id.movies_movie_title_tv)
+        private val movieDescriptionTextView: TextView = itemView.findViewById(R.id.movies_movie_description_tv)
 
         init {
             itemView.setOnClickListener {

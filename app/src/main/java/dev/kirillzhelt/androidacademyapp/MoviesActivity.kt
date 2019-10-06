@@ -1,6 +1,5 @@
 package dev.kirillzhelt.androidacademyapp
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -23,7 +22,7 @@ class MoviesActivity : AppCompatActivity() {
         moviesRecyclerView.adapter = MoviesAdapter(this, repository.loadMovies()) { position ->
             Toast.makeText(this, movies[position].movieTitle, Toast.LENGTH_SHORT).show()
 
-            val intent = Intent(this, DetailsActivity::class.java)
+            val intent = DetailsActivity.createIntent(this, movies[position])
             startActivity(intent)
         }
     }
