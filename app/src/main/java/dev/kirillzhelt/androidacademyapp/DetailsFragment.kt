@@ -8,6 +8,19 @@ import androidx.fragment.app.Fragment
 
 class DetailsFragment : Fragment() {
 
+//    companion object {
+//
+//        fun newInstance() {
+//            val instance = DetailsFragment()
+//
+//            val bundle = Bundle().apply {
+//                putParcelableArrayList()
+//            }
+//
+//        }
+//
+//    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

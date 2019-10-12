@@ -19,7 +19,7 @@ class MoviesFragment : Fragment() {
 
     private lateinit var repository: Repository
 
-    private lateinit var movies: List<Movie>
+    private lateinit var movies: ArrayList<Movie>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,13 +43,12 @@ class MoviesFragment : Fragment() {
         ) { position ->
             Toast.makeText(activity, movies[position].movieTitle, Toast.LENGTH_SHORT).show()
 
+            val detailsSlidePagerFragment = DetailsSlidePagerFragment.newInstance(movies, position)
+
             fragmentManager?.beginTransaction()
                 ?.addToBackStack(null)
-                ?.replace(R.id.activity_movies_frm_lt, DetailsSlidePagerFragment())
+                ?.replace(R.id.activity_movies_frm_lt, detailsSlidePagerFragment)
                 ?.commit()
-
-//            val intent = DetailsActivity.createIntent(activity!!, movies[position])
-//            startActivity(intent)
         }
 
         return view
