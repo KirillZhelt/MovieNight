@@ -2,7 +2,7 @@ package dev.kirillzhelt.androidacademyapp.model
 
 class Repository {
 
-    private val movies = listOf(
+    private val movies = arrayListOf(
         Movie("https://image.tmdb.org/t/p/w342/c9XxwwhPHdaImA2f1WEfEsbhaFB.jpg",
             "https://image.tmdb.org/t/p/original/t5KONotASgVKq4N19RyhIthWOPG.jpg",
             "Jurassic World",
