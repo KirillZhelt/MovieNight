@@ -8,22 +8,14 @@ import dev.kirillzhelt.androidacademyapp.model.Repository
 
 class MoviesActivity : AppCompatActivity() {
 
-    private lateinit var repository: Repository
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies)
 
-        repository = Repository()
+        val moviesFragment = MoviesFragment()
 
-        val movies = repository.loadMovies()
-
-        val moviesRecyclerView: RecyclerView = findViewById(R.id.movies_rv)
-        moviesRecyclerView.adapter = MoviesAdapter(this, repository.loadMovies()) { position ->
-            Toast.makeText(this, movies[position].movieTitle, Toast.LENGTH_SHORT).show()
-
-            val intent = DetailsActivity.createIntent(this, movies[position])
-            startActivity(intent)
-        }
+        supportFragmentManager.beginTransaction()
+            .add(R.id.activity_movies_frm_lt, moviesFragment)
+            .commit()
     }
 }
