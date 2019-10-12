@@ -1,4 +1,4 @@
-package dev.kirillzhelt.androidacademyapp
+package dev.kirillzhelt.androidacademyapp.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import dev.kirillzhelt.androidacademyapp.R
 import dev.kirillzhelt.androidacademyapp.model.Movie
 
 class MoviesAdapter(context: Context, private val movies: List<Movie>, private val onClickListener: (position: Int) -> Unit): RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
@@ -15,7 +16,13 @@ class MoviesAdapter(context: Context, private val movies: List<Movie>, private v
     private val inflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(inflater.inflate(R.layout.item_movie, parent, false), onClickListener)
+        return ViewHolder(
+            inflater.inflate(
+                R.layout.item_movie,
+                parent,
+                false
+            ), onClickListener
+        )
     }
 
     override fun getItemCount(): Int {

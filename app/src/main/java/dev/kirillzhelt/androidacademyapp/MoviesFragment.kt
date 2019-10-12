@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import dev.kirillzhelt.androidacademyapp.adapters.MoviesAdapter
 import dev.kirillzhelt.androidacademyapp.model.Movie
 import dev.kirillzhelt.androidacademyapp.model.Repository
 
@@ -36,11 +37,19 @@ class MoviesFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_movies, container, false)
 
         val moviesRecyclerView: RecyclerView = view.findViewById(R.id.fragment_movies_movies_rv)
-        moviesRecyclerView.adapter = MoviesAdapter(activity!!, repository.loadMovies()) { position ->
+        moviesRecyclerView.adapter = MoviesAdapter(
+            activity!!,
+            repository.loadMovies()
+        ) { position ->
             Toast.makeText(activity, movies[position].movieTitle, Toast.LENGTH_SHORT).show()
 
-            val intent = DetailsActivity.createIntent(activity!!, movies[position])
-            startActivity(intent)
+            fragmentManager?.beginTransaction()
+                ?.addToBackStack(null)
+                ?.replace(R.id.activity_movies_frm_lt, DetailsSlidePagerFragment())
+                ?.commit()
+
+//            val intent = DetailsActivity.createIntent(activity!!, movies[position])
+//            startActivity(intent)
         }
 
         return view
