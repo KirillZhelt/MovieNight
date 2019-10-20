@@ -41,6 +41,8 @@ class MoviesActivity : AppCompatActivity(), MoviesFragment.OnMovieClickedListene
         return when (item.itemId) {
             R.id.menu_tasks_coroutines_activity_itm -> {
                 val intent = Intent(this, TaskActivity::class.java)
+                intent.putExtra(TaskActivity.ARGS_TASK_TYPE, TaskActivity.ARGS_TASK_TYPE_COROUTINES)
+
                 startActivity(intent)
 
                 true
@@ -48,6 +50,8 @@ class MoviesActivity : AppCompatActivity(), MoviesFragment.OnMovieClickedListene
 
             R.id.menu_tasks_thread_handler_activity_itm -> {
                 val intent = Intent(this, TaskActivity::class.java)
+                intent.putExtra(TaskActivity.ARGS_TASK_TYPE, TaskActivity.ARGS_TASK_TYPE_THREAD_HANDLER)
+
                 startActivity(intent)
 
                 true
