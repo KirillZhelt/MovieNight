@@ -19,6 +19,8 @@ class MoviesFragment : Fragment() {
 
     private lateinit var movies: ArrayList<Movie>
 
+    private lateinit var callback: OnMovieClicked
+
     companion object {
         private const val ARG_MOVIES = "ARG_MOVIES"
 
@@ -49,14 +51,7 @@ class MoviesFragment : Fragment() {
             activity!!,
             movies
         ) { position ->
-            Toast.makeText(activity, movies[position].movieTitle, Toast.LENGTH_SHORT).show()
-
-            val detailsSlidePagerFragment = DetailsSlidePagerFragment.newInstance(movies, position)
-
-            fragmentManager?.beginTransaction()
-                ?.addToBackStack(null)
-                ?.replace(R.id.activity_movies_frm_lt, detailsSlidePagerFragment)
-                ?.commit()
+            callback.onMovieClicked(position)
         }
 
         return view
