@@ -8,6 +8,8 @@ import dev.kirillzhelt.androidacademyapp.model.Repository
 
 class MoviesActivity : AppCompatActivity() {
 
+    private lateinit var repository: Repository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies)
