@@ -1,7 +1,11 @@
 package dev.kirillzhelt.androidacademyapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toast
 import dev.kirillzhelt.androidacademyapp.model.Movie
 import dev.kirillzhelt.androidacademyapp.model.Repository
@@ -25,6 +29,32 @@ class MoviesActivity : AppCompatActivity(), MoviesFragment.OnMovieClickedListene
         supportFragmentManager.beginTransaction()
             .add(R.id.activity_movies_frm_lt, moviesFragment)
             .commit()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_tasks, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_tasks_coroutines_activity_itm -> {
+                val intent = Intent(this, TaskActivity::class.java)
+                startActivity(intent)
+
+                true
+            }
+
+            R.id.menu_tasks_thread_handler_activity_itm -> {
+                val intent = Intent(this, TaskActivity::class.java)
+                startActivity(intent)
+
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onMovieClicked(position: Int) {

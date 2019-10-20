@@ -4,6 +4,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".AsyncActivity">
+        tools:context=".TaskActivity">
+
+    <FrameLayout android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/activity_task_fragment_frm_lt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
