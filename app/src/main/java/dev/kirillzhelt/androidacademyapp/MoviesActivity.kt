@@ -3,11 +3,10 @@ package dev.kirillzhelt.androidacademyapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
 import dev.kirillzhelt.androidacademyapp.model.Movie
 import dev.kirillzhelt.androidacademyapp.model.Repository
 
-class MoviesActivity : AppCompatActivity(), MoviesFragment.OnMovieClicked {
+class MoviesActivity : AppCompatActivity(), MoviesFragment.OnMovieClickedListener {
 
     private lateinit var repository: Repository
 

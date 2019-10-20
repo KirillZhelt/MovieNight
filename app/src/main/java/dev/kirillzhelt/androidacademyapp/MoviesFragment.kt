@@ -1,16 +1,15 @@
 package dev.kirillzhelt.androidacademyapp
 
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import dev.kirillzhelt.androidacademyapp.adapters.MoviesAdapter
 import dev.kirillzhelt.androidacademyapp.model.Movie
-import dev.kirillzhelt.androidacademyapp.model.Repository
 
 /**
  * A simple [Fragment] subclass.
@@ -19,7 +18,7 @@ class MoviesFragment : Fragment() {
 
     private lateinit var movies: ArrayList<Movie>
 
-    private lateinit var callback: OnMovieClicked
+    private lateinit var listener: OnMovieClickedListener
 
     companion object {
         private const val ARG_MOVIES = "ARG_MOVIES"
@@ -51,13 +50,21 @@ class MoviesFragment : Fragment() {
             activity!!,
             movies
         ) { position ->
-            callback.onMovieClicked(position)
+            listener.onMovieClicked(position)
         }
 
         return view
     }
 
-    interface OnMovieClicked {
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if (context is MoviesActivity) {
+            listener = context
+        }
+    }
+
+    interface OnMovieClickedListener {
         fun onMovieClicked(position: Int)
     }
 
