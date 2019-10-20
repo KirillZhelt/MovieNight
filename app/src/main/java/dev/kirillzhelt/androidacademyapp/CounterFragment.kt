@@ -37,7 +37,7 @@ class CounterFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_counter, container, false)
-        
+
         view.findViewById<TextView>(R.id.fragment_counter_tv).text = arguments!!.getString(ARGS_TASK_TYPE)
 
         return view
