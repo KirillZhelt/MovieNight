@@ -17,16 +17,22 @@ import dev.kirillzhelt.androidacademyapp.model.Repository
  */
 class MoviesFragment : Fragment() {
 
-    private lateinit var repository: Repository
-
     private lateinit var movies: ArrayList<Movie>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    companion object {
+        private const val ARG_MOVIES = "ARG_MOVIES"
 
-        repository = Repository()
+        fun newInstance(movies: ArrayList<Movie>): MoviesFragment {
+            val instance = MoviesFragment()
 
-        movies = repository.loadMovies()
+            val bundle = Bundle().apply {
+                putParcelableArrayList(ARG_MOVIES, movies)
+            }
+
+            instance.arguments = bundle
+
+            return instance
+        }
     }
 
     override fun onCreateView(
@@ -36,10 +42,12 @@ class MoviesFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_movies, container, false)
 
+        movies = arguments!!.getParcelableArrayList<Movie>(ARG_MOVIES)!!
+
         val moviesRecyclerView: RecyclerView = view.findViewById(R.id.fragment_movies_movies_rv)
         moviesRecyclerView.adapter = MoviesAdapter(
             activity!!,
-            repository.loadMovies()
+            movies
         ) { position ->
             Toast.makeText(activity, movies[position].movieTitle, Toast.LENGTH_SHORT).show()
 
@@ -54,5 +62,8 @@ class MoviesFragment : Fragment() {
         return view
     }
 
+    interface OnMovieClicked {
+        fun onMovieClicked(position: Int)
+    }
 
 }
