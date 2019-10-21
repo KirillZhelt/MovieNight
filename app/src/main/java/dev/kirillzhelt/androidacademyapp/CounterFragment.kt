@@ -6,12 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 
 /**
  * A simple [Fragment] subclass.
  */
 class CounterFragment : Fragment() {
+
+    private lateinit var taskCreateButton: Button
+    private lateinit var taskStartButton: Button
+    private lateinit var taskCancelButton: Button
+
+    private lateinit var counterTextView: TextView
 
     companion object {
         private const val ARGS_TASK_TYPE = "ARGS_TASK_TYPE"
@@ -38,7 +45,17 @@ class CounterFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_counter, container, false)
 
-        view.findViewById<TextView>(R.id.fragment_counter_tv).text = arguments!!.getString(ARGS_TASK_TYPE)
+        taskCreateButton = view.findViewById(R.id.fragment_counter_create_btn)
+        taskStartButton = view.findViewById(R.id.fragment_counter_start_btn)
+        taskCancelButton = view.findViewById(R.id.fragment_counter_cancel_btn)
+
+        counterTextView = view.findViewById(R.id.fragment_counter_tv)
+
+        taskCreateButton.setOnClickListener {
+
+        }
+
+        counterTextView.text = arguments!!.getString(ARGS_TASK_TYPE)
 
         return view
     }

@@ -18,7 +18,7 @@ class MoviesFragment : Fragment() {
 
     private lateinit var movies: ArrayList<Movie>
 
-    private lateinit var listener: OnMovieClickedListener
+    private var listener: OnMovieClickedListener? = null
 
     companion object {
         private const val ARG_MOVIES = "ARG_MOVIES"
@@ -50,7 +50,7 @@ class MoviesFragment : Fragment() {
             activity!!,
             movies
         ) { position ->
-            listener.onMovieClicked(position)
+            listener?.onMovieClicked(position)
         }
 
         return view
@@ -62,6 +62,12 @@ class MoviesFragment : Fragment() {
         if (context is MoviesActivity) {
             listener = context
         }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+
+        listener = null
     }
 
     interface OnMovieClickedListener {

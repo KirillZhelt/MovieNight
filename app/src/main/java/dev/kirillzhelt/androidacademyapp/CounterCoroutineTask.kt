@@ -1,14 +1,39 @@
 package dev.kirillzhelt.androidacademyapp
 
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
-class CounterCoroutineTask {
+class CounterCoroutineTask(private val listener: TaskEventContract.Lifecycle) : CoroutineScope, TaskEventContract.Operationable {
 
-    suspend fun count() = coroutineScope {
-        repeat(10) {
-            delay(500)
+    override val coroutineContext: CoroutineContext
+        get() = SupervisorJob()
+
+    private var job: Job? = null
+
+    override fun createTask() {
+        job = launch(context = Dispatchers.Default, start = CoroutineStart.LAZY) {
+            repeat (10) {
+                launch (Dispatchers.Main) {
+                    listener.onProgressUpdate(it)
+                }
+
+                delay(500)
+            }
+
+            launch(Dispatchers.Main) {
+                listener.onPostExecute()
+            }
         }
+
+        listener.onPreExecute()
     }
 
+    override fun startTask(): Boolean? {
+        return job?.start()
+    }
+
+    override fun cancelTask() {
+        job?.cancel()
+        coroutineContext.cancel()
+    }
 }
