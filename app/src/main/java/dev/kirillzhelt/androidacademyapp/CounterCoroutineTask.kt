@@ -3,7 +3,7 @@ package dev.kirillzhelt.androidacademyapp
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class CounterCoroutineTask(private val listener: TaskEventContract.Lifecycle) : CoroutineScope, TaskEventContract.Operationable {
+class CounterCoroutineTask(private val listener: TaskEventContract.Lifecycle) : CoroutineScope, TaskEventContract.Task {
 
     override val coroutineContext: CoroutineContext
         get() = SupervisorJob()

@@ -8,7 +8,7 @@ interface TaskEventContract {
         fun onProgressUpdate(progress: Int)
     }
 
-    interface Operationable {
+    interface Task {
         fun createTask()
         fun startTask(): Boolean?
         fun cancelTask()

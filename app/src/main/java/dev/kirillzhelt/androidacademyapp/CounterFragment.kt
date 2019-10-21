@@ -21,7 +21,7 @@ class CounterFragment : Fragment(), TaskEventContract.Lifecycle {
 
     private lateinit var counterTextView: TextView
 
-    private var task: TaskEventContract.Operationable? = null
+    private var task: TaskEventContract.Task? = null
 
     companion object {
         private const val ARGS_TASK_TYPE = "ARGS_TASK_TYPE"
@@ -96,7 +96,7 @@ class CounterFragment : Fragment(), TaskEventContract.Lifecycle {
     private fun buildTask() {
         task = when (arguments?.getString(ARGS_TASK_TYPE)) {
             ARGS_TASK_TYPE_COROUTINES -> CounterCoroutineTask(this)
-            ARGS_TASK_TYPE_THREAD_HANDLER -> throw NotImplementedError()
+            ARGS_TASK_TYPE_THREAD_HANDLER -> CounterThreadTask(this)
             else -> throw IllegalArgumentException()
         }
     }
