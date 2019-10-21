@@ -11,7 +11,7 @@ class CounterCoroutineTask(private val listener: TaskEventContract.Lifecycle) : 
     private var job: Job? = null
 
     override fun createTask() {
-        job = launch(context = Dispatchers.Default, start = CoroutineStart.LAZY) {
+        job = launch(context = Dispatchers.IO, start = CoroutineStart.LAZY) {
             repeat (10) {
                 launch (Dispatchers.Main) {
                     listener.onProgressUpdate(it)

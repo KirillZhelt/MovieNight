@@ -8,17 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import java.lang.IllegalArgumentException
 
 /**
  * A simple [Fragment] subclass.
  */
-class CounterFragment : Fragment() {
+class CounterFragment : Fragment(), TaskEventContract.Lifecycle {
 
     private lateinit var taskCreateButton: Button
     private lateinit var taskStartButton: Button
     private lateinit var taskCancelButton: Button
 
     private lateinit var counterTextView: TextView
+
+    private var task: TaskEventContract.Operationable? = null
 
     companion object {
         private const val ARGS_TASK_TYPE = "ARGS_TASK_TYPE"
@@ -52,13 +55,49 @@ class CounterFragment : Fragment() {
         counterTextView = view.findViewById(R.id.fragment_counter_tv)
 
         taskCreateButton.setOnClickListener {
+            buildTask()
 
+            task?.createTask()
         }
 
-        counterTextView.text = arguments!!.getString(ARGS_TASK_TYPE)
+        taskStartButton.setOnClickListener {
+            task?.startTask()
+        }
+
+        taskCancelButton.setOnClickListener {
+            task?.cancelTask()
+
+            counterTextView.text = arguments?.getString(ARGS_TASK_TYPE) ?: throw IllegalArgumentException()
+        }
+
+        counterTextView.text = arguments?.getString(ARGS_TASK_TYPE) ?: throw IllegalArgumentException()
 
         return view
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
 
+        task?.cancelTask()
+    }
+
+    override fun onPreExecute() {
+        counterTextView.text = getString(R.string.task_created)
+    }
+
+    override fun onPostExecute() {
+        counterTextView.text = getString(R.string.task_done)
+    }
+
+    override fun onProgressUpdate(progress: Int) {
+        counterTextView.text = progress.toString()
+    }
+
+    private fun buildTask() {
+        task = when (arguments?.getString(ARGS_TASK_TYPE)) {
+            ARGS_TASK_TYPE_COROUTINES -> CounterCoroutineTask(this)
+            ARGS_TASK_TYPE_THREAD_HANDLER -> throw NotImplementedError()
+            else -> throw IllegalArgumentException()
+        }
+    }
 }
