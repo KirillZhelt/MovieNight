@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import java.lang.IllegalArgumentException
 
 /**
@@ -22,6 +24,8 @@ class CounterFragment : Fragment(), TaskEventContract.Lifecycle {
     private lateinit var counterTextView: TextView
 
     private var task: TaskEventContract.Task? = null
+
+    private lateinit var counterViewModel: CounterViewModel
 
     companion object {
         private const val ARGS_TASK_TYPE = "ARGS_TASK_TYPE"
@@ -39,6 +43,12 @@ class CounterFragment : Fragment(), TaskEventContract.Lifecycle {
 
             return instance
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        counterViewModel = ViewModelProviders.of(this)[CounterViewModel::class.java]
     }
 
     override fun onCreateView(
