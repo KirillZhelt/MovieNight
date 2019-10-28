@@ -48,7 +48,13 @@ class CounterFragment : Fragment(), TaskEventContract.Lifecycle {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        counterViewModel = ViewModelProviders.of(this)[CounterViewModel::class.java]
+        val counterType = when (arguments?.getString(ARGS_TASK_TYPE)) {
+            ARGS_TASK_TYPE_COROUTINES -> CounterViewModel.CounterType.COROUTINES
+            ARGS_TASK_TYPE_THREAD_HANDLER -> CounterViewModel.CounterType.THREAD_HANDLER
+            else -> throw IllegalArgumentException("Illegal ARGS_TASK_TYPE argument")
+        }
+        
+        counterViewModel = ViewModelProviders.of(this, CounterViewModelFactory(counterType))[CounterViewModel::class.java]
     }
 
     override fun onCreateView(
