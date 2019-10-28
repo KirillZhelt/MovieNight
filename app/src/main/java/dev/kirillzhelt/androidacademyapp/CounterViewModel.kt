@@ -14,6 +14,7 @@ class CounterViewModel(application: Application, private val counterType: Counte
     }
 
     private var task: TaskEventContract.Task? = null
+    private var running = false
 
     private val _counterText: MutableLiveData<String> by lazy {
         MutableLiveData<String>().apply {
@@ -32,10 +33,13 @@ class CounterViewModel(application: Application, private val counterType: Counte
 
     override fun onPreExecute() {
         _counterText.value = getApplication<Application>().resources.getString(R.string.task_created)
+        running = true
     }
 
     override fun onPostExecute() {
         _counterText.value = getApplication<Application>().resources.getString(R.string.task_done)
+        running = false
+        task = null
     }
 
     override fun onProgressUpdate(progress: Int) {
@@ -43,6 +47,8 @@ class CounterViewModel(application: Application, private val counterType: Counte
     }
 
     fun createTask() {
+        task?.cancelTask()
+
         task = when (counterType) {
             CounterType.COROUTINES -> CounterCoroutineTask(this)
             CounterType.THREAD_HANDLER -> CounterThreadTask(this)
@@ -52,14 +58,24 @@ class CounterViewModel(application: Application, private val counterType: Counte
     }
 
     fun startTask() {
-        task?.startTask()
+        if (task == null) {
+            _counterText.value = "Create task before starting"
+        } else {
+            task?.startTask()
+        }
     }
 
     fun cancelTask() {
-        task?.cancelTask()
+        if (task == null) {
+            _counterText.value = "Task is not created"
+        } else if (!running) {
+            _counterText.value = "Task is not running"
+        } else {
+            task?.cancelTask()
+            task = null
 
-        _counterText.value = title
-
+            _counterText.value = title
+        }
     }
 
     private val title: String by lazy {
