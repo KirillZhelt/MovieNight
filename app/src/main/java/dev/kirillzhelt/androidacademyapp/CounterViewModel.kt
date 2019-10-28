@@ -59,7 +59,7 @@ class CounterViewModel(application: Application, private val counterType: Counte
 
     fun startTask() {
         if (task == null) {
-            _counterText.value = "Create task before starting"
+            _counterText.value = getApplication<Application>().resources.getString(R.string.create_before_strarting_err_msg)
         } else {
             task?.startTask()
         }
@@ -67,9 +67,9 @@ class CounterViewModel(application: Application, private val counterType: Counte
 
     fun cancelTask() {
         if (task == null) {
-            _counterText.value = "Task is not created"
+            _counterText.value = getApplication<Application>().resources.getString(R.string.not_created_err_msg)
         } else if (!running) {
-            _counterText.value = "Task is not running"
+            _counterText.value = getApplication<Application>().resources.getString(R.string.not_running_err_msg)
         } else {
             task?.cancelTask()
             task = null
@@ -80,8 +80,8 @@ class CounterViewModel(application: Application, private val counterType: Counte
 
     private val title: String by lazy {
         when (counterType) {
-            CounterType.COROUTINES -> "Coroutines"
-            CounterType.THREAD_HANDLER -> "Thread Handler"
+            CounterType.COROUTINES -> getApplication<Application>().resources.getString(R.string.coroutines_title)
+            CounterType.THREAD_HANDLER -> getApplication<Application>().resources.getString(R.string.thread_handler_title)
         }
     }
 }
