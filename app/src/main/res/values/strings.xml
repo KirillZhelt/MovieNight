@@ -45,4 +45,10 @@
     <string name="cancel_button_text">Cancel</string>
     <string name="task_created">Task created</string>
     <string name="task_done">Task done</string>
+    <string name="create_before_strarting_err_msg">Create task before starting</string>
+    <string name="not_created_err_msg">Task not created</string>
+    <string name="not_running_err_msg">Task is not running</string>
+    <string name="coroutines_title">Coroutines</string>
+    <string name="thread_handler_title">ThreadHandler</string>
+
 </resources>
