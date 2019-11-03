@@ -1,4 +1,4 @@
-package dev.kirillzhelt.androidacademyapp
+package dev.kirillzhelt.androidacademyapp.movies
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,10 +7,14 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
+import dev.kirillzhelt.androidacademyapp.R
+import dev.kirillzhelt.androidacademyapp.details.DetailsSlidePagerFragment
 import dev.kirillzhelt.androidacademyapp.model.Movie
 import dev.kirillzhelt.androidacademyapp.model.Repository
+import dev.kirillzhelt.androidacademyapp.tasks.TaskActivity
 
-class MoviesActivity : AppCompatActivity(), MoviesFragment.OnMovieClickedListener {
+class MoviesActivity : AppCompatActivity(),
+    MoviesFragment.OnMovieClickedListener {
 
     private lateinit var repository: Repository
 
@@ -24,7 +28,8 @@ class MoviesActivity : AppCompatActivity(), MoviesFragment.OnMovieClickedListene
 
         movies = repository.loadMovies()
 
-        val moviesFragment = MoviesFragment.newInstance(movies)
+        val moviesFragment =
+            MoviesFragment.newInstance(movies)
 
         supportFragmentManager.beginTransaction()
             .add(R.id.activity_movies_frm_lt, moviesFragment)

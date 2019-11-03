@@ -1,10 +1,12 @@
-package dev.kirillzhelt.androidacademyapp
+package dev.kirillzhelt.androidacademyapp.tasks.threadhandler
 
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
+import dev.kirillzhelt.androidacademyapp.tasks.TaskEventContract
 
-class CounterThreadTask(private val listener: TaskEventContract.Lifecycle) : TaskEventContract.Task {
+class CounterThreadTask(private val listener: TaskEventContract.Lifecycle) :
+    TaskEventContract.Task {
 
     private var thread: Thread? = null
 

@@ -1,4 +1,4 @@
-package dev.kirillzhelt.androidacademyapp
+package dev.kirillzhelt.androidacademyapp.tasks
 
 interface TaskEventContract {
 

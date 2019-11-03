@@ -1,4 +1,4 @@
-package dev.kirillzhelt.androidacademyapp
+package dev.kirillzhelt.androidacademyapp.tasks
 
 
 import android.os.Bundle
@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import dev.kirillzhelt.androidacademyapp.R
 import java.lang.IllegalArgumentException
 
 /**
@@ -55,7 +56,11 @@ class CounterFragment : Fragment() {
         val application = activity?.application ?: throw Exception("No activity for retrieving application")
 
         counterViewModel = ViewModelProviders.of(this,
-            CounterViewModelFactory(application, counterType))[CounterViewModel::class.java]
+            CounterViewModelFactory(
+                application,
+                counterType
+            )
+        )[CounterViewModel::class.java]
     }
 
     override fun onCreateView(

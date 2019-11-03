@@ -7,6 +7,6 @@
         android:layout_height="match_parent"
         android:id="@+id/fragment_movies_movies_rv"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:context=".MoviesFragment" >
+        tools:context=".movies.MoviesFragment" >
 
 </androidx.recyclerview.widget.RecyclerView>

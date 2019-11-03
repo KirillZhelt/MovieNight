@@ -1,7 +1,8 @@
-package dev.kirillzhelt.androidacademyapp
+package dev.kirillzhelt.androidacademyapp.tasks
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import dev.kirillzhelt.androidacademyapp.R
 import java.lang.IllegalArgumentException
 
 class TaskActivity : AppCompatActivity() {

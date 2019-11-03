@@ -1,4 +1,4 @@
-package dev.kirillzhelt.androidacademyapp
+package dev.kirillzhelt.androidacademyapp.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import dev.kirillzhelt.androidacademyapp.adapters.DetailsSlidePagerAdapter
+import dev.kirillzhelt.androidacademyapp.R
 import dev.kirillzhelt.androidacademyapp.model.Movie
 
 class DetailsSlidePagerFragment : Fragment() {
@@ -41,7 +41,10 @@ class DetailsSlidePagerFragment : Fragment() {
         val movies: ArrayList<Movie> = arguments!!.getParcelableArrayList(ARG_MOVIES)!!
 
         pager = view.findViewById(R.id.fragment_details_slide_pager_pgr)
-        pager.adapter = DetailsSlidePagerAdapter(fragmentManager!!, movies)
+        pager.adapter = DetailsSlidePagerAdapter(
+            fragmentManager!!,
+            movies
+        )
 
         pager.currentItem = arguments!!.getInt(ARG_CURRENT_MOVIE_POSITION)
 

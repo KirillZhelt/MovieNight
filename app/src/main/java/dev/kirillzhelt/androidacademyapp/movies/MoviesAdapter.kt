@@ -1,4 +1,4 @@
-package dev.kirillzhelt.androidacademyapp.adapters
+package dev.kirillzhelt.androidacademyapp.movies
 
 import android.content.Context
 import android.view.LayoutInflater

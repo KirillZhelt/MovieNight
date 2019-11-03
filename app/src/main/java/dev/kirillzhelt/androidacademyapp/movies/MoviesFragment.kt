@@ -1,4 +1,4 @@
-package dev.kirillzhelt.androidacademyapp
+package dev.kirillzhelt.androidacademyapp.movies
 
 
 import android.content.Context
@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import dev.kirillzhelt.androidacademyapp.adapters.MoviesAdapter
+import dev.kirillzhelt.androidacademyapp.R
 import dev.kirillzhelt.androidacademyapp.model.Movie
 
 /**

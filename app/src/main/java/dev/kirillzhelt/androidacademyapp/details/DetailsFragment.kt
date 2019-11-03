@@ -1,4 +1,4 @@
-package dev.kirillzhelt.androidacademyapp
+package dev.kirillzhelt.androidacademyapp.details
 
 import android.content.Intent
 import android.net.Uri
@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import dev.kirillzhelt.androidacademyapp.R
 import dev.kirillzhelt.androidacademyapp.model.Movie
 
 class DetailsFragment : Fragment() {
@@ -58,8 +59,12 @@ class DetailsFragment : Fragment() {
             openMovieTrailer()
         }
 
-        Glide.with(this).load(movie.moviePosterURL).placeholder(R.drawable.movie_poster_placeholder).into(view.findViewById(R.id.details_movie_poster_iv))
-        Glide.with(this).load(movie.movieBackgroundURL).placeholder(R.drawable.movie_background_placeholder).into(view.findViewById(R.id.details_movie_background_iv))
+        Glide.with(this).load(movie.moviePosterURL).placeholder(R.drawable.movie_poster_placeholder).into(view.findViewById(
+            R.id.details_movie_poster_iv
+        ))
+        Glide.with(this).load(movie.movieBackgroundURL).placeholder(R.drawable.movie_background_placeholder).into(view.findViewById(
+            R.id.details_movie_background_iv
+        ))
     }
 
     private fun openMovieTrailer() {
