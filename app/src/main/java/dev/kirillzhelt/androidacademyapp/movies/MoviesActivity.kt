@@ -29,6 +29,9 @@ class MoviesActivity : AppCompatActivity(),
 
         repository = Repository()
 
+        // TODO: move to view model and scope to view model scope, use live data
+        // TODO: add loader animations
+        // TODO: try interceptors to add api_key
         GlobalScope.launch(Dispatchers.Default) {
             movies = repository.loadMoviesFromNetwork()
 
