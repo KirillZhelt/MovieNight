@@ -1,5 +1,13 @@
 package dev.kirillzhelt.androidacademyapp.model
 
+import android.util.Log
+import dev.kirillzhelt.androidacademyapp.tmdb.API_KEY
+import dev.kirillzhelt.androidacademyapp.tmdb.BASE_TMDB_URL
+import dev.kirillzhelt.androidacademyapp.tmdb.MovieTMDB
+import dev.kirillzhelt.androidacademyapp.tmdb.TMDBService
+import retrofit2.*
+import retrofit2.converter.moshi.MoshiConverterFactory
+
 class Repository {
 
     private val movies = arrayListOf(
@@ -68,5 +76,21 @@ class Repository {
             )
         )
 
+    private val retrofit = Retrofit.Builder()
+        .baseUrl(BASE_TMDB_URL)
+        .addConverterFactory(MoshiConverterFactory.create())
+        .build()
+
+    private val tmdbService: TMDBService = retrofit.create()
+
     fun loadMovies() = movies
+
+    suspend fun loadMoviesFromNetwork(): ArrayList<Movie> {
+        val popularMovies = tmdbService.getMovies(API_KEY).results
+
+        Log.i("Repository", popularMovies.toString())
+
+        return movies
+    }
+
 }

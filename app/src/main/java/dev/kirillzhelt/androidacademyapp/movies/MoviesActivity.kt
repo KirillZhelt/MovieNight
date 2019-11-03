@@ -12,6 +12,9 @@ import dev.kirillzhelt.androidacademyapp.details.DetailsSlidePagerFragment
 import dev.kirillzhelt.androidacademyapp.model.Movie
 import dev.kirillzhelt.androidacademyapp.model.Repository
 import dev.kirillzhelt.androidacademyapp.tasks.TaskActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MoviesActivity : AppCompatActivity(),
     MoviesFragment.OnMovieClickedListener {
@@ -25,6 +28,10 @@ class MoviesActivity : AppCompatActivity(),
         setContentView(R.layout.activity_movies)
 
         repository = Repository()
+
+        GlobalScope.launch(Dispatchers.Default) {
+            repository.loadMoviesFromNetwork()
+        }
 
         movies = repository.loadMovies()
 
