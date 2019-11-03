@@ -30,17 +30,15 @@ class MoviesActivity : AppCompatActivity(),
         repository = Repository()
 
         GlobalScope.launch(Dispatchers.Default) {
-            repository.loadMoviesFromNetwork()
+            movies = repository.loadMoviesFromNetwork()
+
+            val moviesFragment =
+                MoviesFragment.newInstance(movies)
+
+            supportFragmentManager.beginTransaction()
+                .add(R.id.activity_movies_frm_lt, moviesFragment)
+                .commit()
         }
-
-        movies = repository.loadMovies()
-
-        val moviesFragment =
-            MoviesFragment.newInstance(movies)
-
-        supportFragmentManager.beginTransaction()
-            .add(R.id.activity_movies_frm_lt, moviesFragment)
-            .commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
