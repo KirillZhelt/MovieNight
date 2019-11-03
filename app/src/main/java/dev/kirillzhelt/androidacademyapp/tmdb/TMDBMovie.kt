@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class MovieTMDB(
+data class TMDBMovie(
     @Json(name = "id")
     val movieId: String,
 

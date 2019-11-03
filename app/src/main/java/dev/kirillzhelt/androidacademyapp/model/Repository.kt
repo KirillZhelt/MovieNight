@@ -3,7 +3,6 @@ package dev.kirillzhelt.androidacademyapp.model
 import android.util.Log
 import dev.kirillzhelt.androidacademyapp.tmdb.API_KEY
 import dev.kirillzhelt.androidacademyapp.tmdb.BASE_TMDB_URL
-import dev.kirillzhelt.androidacademyapp.tmdb.MovieTMDB
 import dev.kirillzhelt.androidacademyapp.tmdb.TMDBService
 import retrofit2.*
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -89,6 +88,15 @@ class Repository {
         val popularMovies = tmdbService.getMovies(API_KEY).results
 
         Log.i("Repository", popularMovies.toString())
+
+        val moviesVideo = popularMovies.map { tmdbService.getVideo(it.movieId, API_KEY).results }
+
+        Log.i("Repository", moviesVideo.toString())
+
+        
+        for ((index, movie) in popularMovies.withIndex()) {
+
+        }
 
         return movies
     }
