@@ -6,7 +6,13 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import dev.kirillzhelt.androidacademyapp.details.DetailsFragment
 import dev.kirillzhelt.androidacademyapp.model.Movie
 
-class DetailsSlidePagerAdapter(fragmentManager: FragmentManager, private val movies: ArrayList<Movie>) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class DetailsSlidePagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+
+    var movies: List<Movie> = listOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun getItem(position: Int): Fragment {
         return DetailsFragment.newInstance(movies[position])
