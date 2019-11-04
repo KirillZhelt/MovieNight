@@ -23,15 +23,22 @@ class MoviesViewModel: ViewModel() {
     val currentMoviePosition: LiveData<Int>
         get() = _currentMoviePosition
 
-    private val _navigateDetailsEvent =  MutableLiveData<Boolean>(false)
+    private val _navigateDetailsEvent = MutableLiveData<Boolean>(false)
 
     val navigateDetailsEvent: LiveData<Boolean>
         get() = _navigateDetailsEvent
+
+    private val _loadingFinishEvent = MutableLiveData<Boolean>(false)
+
+    val loadingFinishEvent: LiveData<Boolean>
+        get() = _loadingFinishEvent
 
     init {
 
         viewModelScope.launch(Dispatchers.IO) {
             _movies.postValue(repository.loadMoviesFromNetwork())
+
+            _loadingFinishEvent.postValue(true)
         }
 
     }
@@ -44,5 +51,4 @@ class MoviesViewModel: ViewModel() {
     fun onNavigateDetailsComplete() {
         _navigateDetailsEvent.value = false
     }
-
 }

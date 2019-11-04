@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
@@ -40,6 +41,12 @@ class MoviesFragment : Fragment() {
 
         moviesViewModel.movies.observe(this, Observer { movies ->
             adapter.movies = movies
+        })
+
+        moviesViewModel.loadingFinishEvent.observe(this, Observer { event ->
+            if (event) {
+                view.findViewById<RelativeLayout>(R.id.fragment_movies_loader_rl).visibility = View.GONE
+            }
         })
 
         return view

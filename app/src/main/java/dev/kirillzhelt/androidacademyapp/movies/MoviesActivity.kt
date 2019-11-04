@@ -29,9 +29,7 @@ class MoviesActivity : AppCompatActivity() {
 
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel::class.java)
 
-        // TODO: move to view model and scope to view model scope, use live data
-        // TODO: add loader animations
-        // TODO: try interceptors to add api_key
+        // TODO: try interceptors to add api_key, and to have other pages
 
         supportFragmentManager.beginTransaction()
             .add(R.id.activity_movies_frm_lt, MoviesFragment())
