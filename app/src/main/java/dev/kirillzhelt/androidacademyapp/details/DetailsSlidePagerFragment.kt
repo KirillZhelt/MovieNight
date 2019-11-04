@@ -5,31 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import dev.kirillzhelt.androidacademyapp.R
 import dev.kirillzhelt.androidacademyapp.model.Movie
+import dev.kirillzhelt.androidacademyapp.movies.MoviesViewModel
 
 class DetailsSlidePagerFragment : Fragment() {
 
-    companion object {
-        private const val ARG_MOVIES = "ARG_MOVIES"
-        private const val ARG_CURRENT_MOVIE_POSITION = "ARG_CURRENT_MOVIE_POSITION"
-
-        fun newInstance(movies: ArrayList<Movie>, currentMoviePosition: Int): DetailsSlidePagerFragment {
-            val instance = DetailsSlidePagerFragment()
-
-            val bundle = Bundle().apply {
-                putParcelableArrayList(ARG_MOVIES, movies)
-                putInt(ARG_CURRENT_MOVIE_POSITION, currentMoviePosition)
-            }
-
-            instance.arguments = bundle
-
-            return instance
-        }
-    }
-
     private lateinit var pager: ViewPager
+
+    private lateinit var moviesViewModel: MoviesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,15 +25,22 @@ class DetailsSlidePagerFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_details_slide_pager, container, false)
 
-        val movies: ArrayList<Movie> = arguments!!.getParcelableArrayList(ARG_MOVIES)!!
+        moviesViewModel = activity?.run {
+            ViewModelProviders.of(this).get(MoviesViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+
+        val adapter = DetailsSlidePagerAdapter(fragmentManager ?: throw Exception("Invalid FragmentManager"))
 
         pager = view.findViewById(R.id.fragment_details_slide_pager_pgr)
-        pager.adapter = DetailsSlidePagerAdapter(
-            fragmentManager!!,
-            movies
-        )
+        pager.adapter = adapter
 
-        pager.currentItem = arguments!!.getInt(ARG_CURRENT_MOVIE_POSITION)
+        moviesViewModel.movies.observe(this, Observer { movies ->
+            adapter.movies = movies
+        })
+
+        moviesViewModel.currentMoviePosition.observe(this, Observer { currentItem ->
+            pager.currentItem = currentItem
+        })
 
         return view
     }
