@@ -18,8 +18,6 @@ import dev.kirillzhelt.androidacademyapp.model.Movie
  */
 class MoviesFragment : Fragment() {
 
-    private var listener: OnMovieClickedListener? = null
-
     private lateinit var moviesViewModel: MoviesViewModel
 
     override fun onCreateView(
@@ -34,7 +32,7 @@ class MoviesFragment : Fragment() {
         } ?: throw Exception("Invalid Activity")
 
         val adapter = MoviesAdapter(activity ?: throw Exception("Invalid activity")) { position ->
-            listener?.onMovieClicked(position)
+            moviesViewModel.onNavigateDetails(position)
         }
 
         val moviesRecyclerView: RecyclerView = view.findViewById(R.id.fragment_movies_movies_rv)
@@ -45,24 +43,6 @@ class MoviesFragment : Fragment() {
         })
 
         return view
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        if (context is MoviesActivity) {
-            listener = context
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-
-        listener = null
-    }
-
-    interface OnMovieClickedListener {
-        fun onMovieClicked(position: Int)
     }
 
 }

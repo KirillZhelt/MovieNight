@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import dev.kirillzhelt.androidacademyapp.R
@@ -18,8 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MoviesActivity : AppCompatActivity(),
-    MoviesFragment.OnMovieClickedListener {
+class MoviesActivity : AppCompatActivity() {
 
     private lateinit var moviesViewModel: MoviesViewModel
 
@@ -36,6 +36,17 @@ class MoviesActivity : AppCompatActivity(),
         supportFragmentManager.beginTransaction()
             .add(R.id.activity_movies_frm_lt, MoviesFragment())
             .commit()
+
+        moviesViewModel.navigateDetailsEvent.observe(this, Observer { event ->
+            if (event) {
+                supportFragmentManager.beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.activity_movies_frm_lt, DetailsSlidePagerFragment())
+                    .commit()
+
+                moviesViewModel.onNavigateDetailsComplete()
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -67,12 +78,5 @@ class MoviesActivity : AppCompatActivity(),
 
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    override fun onMovieClicked(position: Int) {
-        supportFragmentManager.beginTransaction()
-            .addToBackStack(null)
-            .replace(R.id.activity_movies_frm_lt, DetailsSlidePagerFragment())
-            .commit()
     }
 }

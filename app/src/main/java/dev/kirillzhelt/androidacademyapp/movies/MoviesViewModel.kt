@@ -23,6 +23,11 @@ class MoviesViewModel: ViewModel() {
     val currentMoviePosition: LiveData<Int>
         get() = _currentMoviePosition
 
+    private val _navigateDetailsEvent =  MutableLiveData<Boolean>(false)
+
+    val navigateDetailsEvent: LiveData<Boolean>
+        get() = _navigateDetailsEvent
+
     init {
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -31,6 +36,13 @@ class MoviesViewModel: ViewModel() {
 
     }
 
+    fun onNavigateDetails(moviePosition: Int) {
+        _navigateDetailsEvent.value = true
+        _currentMoviePosition.value = moviePosition
+    }
 
+    fun onNavigateDetailsComplete() {
+        _navigateDetailsEvent.value = false
+    }
 
 }
