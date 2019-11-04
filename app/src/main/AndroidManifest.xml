@@ -11,11 +11,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".TaskActivity"></activity>
+        <activity android:name=".tasks.TaskActivity"></activity>
         <activity android:name=".ThreadsHandlerActivity" />
         <activity android:name=".CoroutinesActivity" />
         <activity android:name=".AsyncActivity" />
-        <activity android:name=".MoviesActivity">
+        <activity android:name=".movies.MoviesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package dev.kirillzhelt.androidacademyapp.adapters
+package dev.kirillzhelt.androidacademyapp.movies
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,9 +11,15 @@ import com.bumptech.glide.Glide
 import dev.kirillzhelt.androidacademyapp.R
 import dev.kirillzhelt.androidacademyapp.model.Movie
 
-class MoviesAdapter(private val context: Context, private val movies: List<Movie>, private val onClickListener: (position: Int) -> Unit): RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class MoviesAdapter(private val context: Context, private val onClickListener: (position: Int) -> Unit): RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     private val inflater = LayoutInflater.from(context)
+
+    var movies: List<Movie> = listOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(

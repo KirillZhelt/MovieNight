@@ -1,10 +1,12 @@
-package dev.kirillzhelt.androidacademyapp
+package dev.kirillzhelt.androidacademyapp.tasks
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import java.lang.IllegalArgumentException
+import dev.kirillzhelt.androidacademyapp.R
+import dev.kirillzhelt.androidacademyapp.tasks.coroutine.CounterCoroutineTask
+import dev.kirillzhelt.androidacademyapp.tasks.threadhandler.CounterThreadTask
 
 class CounterViewModel(application: Application, private val counterType: CounterType) : AndroidViewModel(application),
     TaskEventContract.Lifecycle {
@@ -50,8 +52,12 @@ class CounterViewModel(application: Application, private val counterType: Counte
         task?.cancelTask()
 
         task = when (counterType) {
-            CounterType.COROUTINES -> CounterCoroutineTask(this)
-            CounterType.THREAD_HANDLER -> CounterThreadTask(this)
+            CounterType.COROUTINES -> CounterCoroutineTask(
+                this
+            )
+            CounterType.THREAD_HANDLER -> CounterThreadTask(
+                this
+            )
         }
 
         task?.createTask()
@@ -80,8 +86,12 @@ class CounterViewModel(application: Application, private val counterType: Counte
 
     private val title: String by lazy {
         when (counterType) {
-            CounterType.COROUTINES -> getApplication<Application>().resources.getString(R.string.coroutines_title)
-            CounterType.THREAD_HANDLER -> getApplication<Application>().resources.getString(R.string.thread_handler_title)
+            CounterType.COROUTINES -> getApplication<Application>().resources.getString(
+                R.string.coroutines_title
+            )
+            CounterType.THREAD_HANDLER -> getApplication<Application>().resources.getString(
+                R.string.thread_handler_title
+            )
         }
     }
 }

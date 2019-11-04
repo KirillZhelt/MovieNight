@@ -1,4 +1,4 @@
-package dev.kirillzhelt.androidacademyapp
+package dev.kirillzhelt.androidacademyapp.tasks
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
@@ -10,7 +10,10 @@ class CounterViewModelFactory(private val application: Application, private val 
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(CounterViewModel::class.java)) {
-            return CounterViewModel(application, counterType) as T
+            return CounterViewModel(
+                application,
+                counterType
+            ) as T
         }
 
         throw IllegalArgumentException("Unknown ViewModel class")

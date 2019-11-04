@@ -1,4 +1,4 @@
-package dev.kirillzhelt.androidacademyapp
+package dev.kirillzhelt.androidacademyapp.movies
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,33 +7,50 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import dev.kirillzhelt.androidacademyapp.R
+import dev.kirillzhelt.androidacademyapp.details.DetailsSlidePagerFragment
 import dev.kirillzhelt.androidacademyapp.model.Movie
 import dev.kirillzhelt.androidacademyapp.model.Repository
+import dev.kirillzhelt.androidacademyapp.tasks.TaskActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
-class MoviesActivity : AppCompatActivity(), MoviesFragment.OnMovieClickedListener {
+class MoviesActivity : AppCompatActivity() {
 
-    private lateinit var repository: Repository
-
-    private lateinit var movies: ArrayList<Movie>
+    private lateinit var moviesViewModel: MoviesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies)
 
-        repository = Repository()
+        moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel::class.java)
 
-        movies = repository.loadMovies()
-
-        val moviesFragment = MoviesFragment.newInstance(movies)
+        // TODO: try interceptors to add api_key, and to have other pages
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.activity_movies_frm_lt, moviesFragment)
+            .add(R.id.activity_movies_frm_lt, MoviesFragment())
             .commit()
+
+        moviesViewModel.navigateDetailsEvent.observe(this, Observer { event ->
+            if (event) {
+                supportFragmentManager.beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.activity_movies_frm_lt, DetailsSlidePagerFragment())
+                    .commit()
+
+                moviesViewModel.onNavigateDetailsComplete()
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_tasks, menu)
+
         return true
     }
 
@@ -59,16 +76,5 @@ class MoviesActivity : AppCompatActivity(), MoviesFragment.OnMovieClickedListene
 
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    override fun onMovieClicked(position: Int) {
-        Toast.makeText(this, movies[position].movieTitle, Toast.LENGTH_SHORT).show()
-
-        val detailsSlidePagerFragment = DetailsSlidePagerFragment.newInstance(movies, position)
-
-        supportFragmentManager.beginTransaction()
-            .addToBackStack(null)
-            .replace(R.id.activity_movies_frm_lt, detailsSlidePagerFragment)
-            .commit()
     }
 }
