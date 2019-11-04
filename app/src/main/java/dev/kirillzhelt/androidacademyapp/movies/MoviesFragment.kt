@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import dev.kirillzhelt.androidacademyapp.R
 import dev.kirillzhelt.androidacademyapp.model.Movie
@@ -16,25 +18,9 @@ import dev.kirillzhelt.androidacademyapp.model.Movie
  */
 class MoviesFragment : Fragment() {
 
-    private lateinit var movies: ArrayList<Movie>
-
     private var listener: OnMovieClickedListener? = null
 
-    companion object {
-        private const val ARG_MOVIES = "ARG_MOVIES"
-
-        fun newInstance(movies: ArrayList<Movie>): MoviesFragment {
-            val instance = MoviesFragment()
-
-            val bundle = Bundle().apply {
-                putParcelableArrayList(ARG_MOVIES, movies)
-            }
-
-            instance.arguments = bundle
-
-            return instance
-        }
-    }
+    private lateinit var moviesViewModel: MoviesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,15 +29,20 @@ class MoviesFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_movies, container, false)
 
-        movies = arguments!!.getParcelableArrayList<Movie>(ARG_MOVIES)!!
+        moviesViewModel = activity?.run {
+            ViewModelProviders.of(this).get(MoviesViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
 
-        val moviesRecyclerView: RecyclerView = view.findViewById(R.id.fragment_movies_movies_rv)
-        moviesRecyclerView.adapter = MoviesAdapter(
-            activity!!,
-            movies
-        ) { position ->
+        val adapter = MoviesAdapter(activity ?: throw Exception("Invalid activity")) { position ->
             listener?.onMovieClicked(position)
         }
+
+        val moviesRecyclerView: RecyclerView = view.findViewById(R.id.fragment_movies_movies_rv)
+        moviesRecyclerView.adapter = adapter
+
+        moviesViewModel.movies.observe(this, Observer { movies ->
+            adapter.movies = movies
+        })
 
         return view
     }
