@@ -8,7 +8,11 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class Repository(private val moviesCache: MoviesCache, private val tmdbService: TMDBService) {
 
-    suspend fun loadMoviesFromNetwork(): ArrayList<Movie> {
+    suspend fun getPopularMovies(): List<Movie> {
+        if (moviesCache.isCached()) {
+            return moviesCache.getMovies()
+        }
+
         val popularMovies = tmdbService.getMovies(API_KEY).results
 
         Log.i("Repository", popularMovies.toString())

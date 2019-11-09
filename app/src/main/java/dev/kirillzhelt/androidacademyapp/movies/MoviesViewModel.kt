@@ -16,9 +16,9 @@ class MoviesViewModel: ViewModel() {
         Dependencies.repository
     }
 
-    private val _movies = MutableLiveData<ArrayList<Movie>>()
+    private val _movies = MutableLiveData<List<Movie>>()
 
-    val movies: LiveData<ArrayList<Movie>>
+    val movies: LiveData<List<Movie>>
         get() = _movies
 
     private val _currentMoviePosition = MutableLiveData<Int>()
@@ -39,7 +39,7 @@ class MoviesViewModel: ViewModel() {
     init {
 
         viewModelScope.launch(Dispatchers.IO) {
-            _movies.postValue(repository.loadMoviesFromNetwork())
+            _movies.postValue(repository.getPopularMovies())
 
             _loadingFinishEvent.postValue(true)
         }
