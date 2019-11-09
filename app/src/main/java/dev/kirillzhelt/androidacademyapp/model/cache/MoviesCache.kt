@@ -1,13 +1,14 @@
 package dev.kirillzhelt.androidacademyapp.model.cache
 
 import dev.kirillzhelt.androidacademyapp.model.Movie
-import dev.kirillzhelt.androidacademyapp.model.SharedPreferenceApi
+import dev.kirillzhelt.androidacademyapp.preferences.SharedPreferenceApi
 import dev.kirillzhelt.androidacademyapp.model.db.MovieDao
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
 class MoviesCache(private val movieDao: MovieDao,
-                  private val sharedPreferenceApi: SharedPreferenceApi) {
+                  private val sharedPreferenceApi: SharedPreferenceApi
+) {
 
     fun isCached(): Boolean {
         val time = System.currentTimeMillis()
@@ -21,5 +22,11 @@ class MoviesCache(private val movieDao: MovieDao,
 
     fun getMovies(): List<Movie> {
         return movieDao.getAll()
+    }
+
+    fun insertMovies(movies: List<Movie>) {
+        movieDao.insertAll(movies)
+
+        sharedPreferenceApi.lastCacheTime = System.currentTimeMillis()
     }
 }

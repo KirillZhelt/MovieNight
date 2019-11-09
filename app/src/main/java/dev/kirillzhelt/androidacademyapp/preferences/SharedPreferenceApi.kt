@@ -1,4 +1,4 @@
-package dev.kirillzhelt.androidacademyapp.model
+package dev.kirillzhelt.androidacademyapp.preferences
 
 interface SharedPreferenceApi {
 
