@@ -9,6 +9,8 @@ import dev.kirillzhelt.androidacademyapp.model.Movie
 @Database(entities = [Movie::class], version = 1)
 abstract class MoviesRoomDatabase: RoomDatabase() {
 
+    abstract fun movieDao(): MovieDao
+
     companion object {
         @Volatile
         private var INSTANCE: MoviesRoomDatabase? = null
