@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.kirillzhelt.androidacademyapp.dependencies.Dependencies
 import dev.kirillzhelt.androidacademyapp.model.Movie
 import dev.kirillzhelt.androidacademyapp.model.Repository
 import kotlinx.coroutines.Dispatchers
@@ -11,7 +12,9 @@ import kotlinx.coroutines.launch
 
 class MoviesViewModel: ViewModel() {
 
-    private val repository: Repository = Repository()
+    private val repository: Repository by lazy {
+        Dependencies.repository
+    }
 
     private val _movies = MutableLiveData<ArrayList<Movie>>()
 
