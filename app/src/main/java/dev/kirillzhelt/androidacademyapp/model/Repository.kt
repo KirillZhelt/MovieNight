@@ -21,7 +21,7 @@ class Repository(private val moviesCache: MoviesCache, private val tmdbService: 
 
         Log.i("Repository", moviesVideo.toString())
 
-        val result = arrayListOf<Movie>()
+        val result = mutableListOf<Movie>()
         for ((index, movie) in popularMovies.withIndex()) {
             result.add(Movie(
                 movie.movieId,
@@ -34,6 +34,8 @@ class Repository(private val moviesCache: MoviesCache, private val tmdbService: 
                 movie.popularity
             ))
         }
+
+        moviesCache.insertMovies(result)
 
         return result
     }
