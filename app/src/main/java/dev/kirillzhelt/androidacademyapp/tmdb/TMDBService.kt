@@ -18,6 +18,6 @@ interface TMDBService {
     suspend fun getMovies(@Query("api_key") apiKey: String): TMDBPopularMovies
 
     @GET("movie/{movie_id}/videos")
-    suspend fun getVideo(@Path("movie_id") movieId: String, @Query("api_key") apiKey: String): TMDBMoviesVideo
+    suspend fun getVideo(@Path("movie_id") movieId: Int, @Query("api_key") apiKey: String): TMDBMoviesVideo
 
 }
