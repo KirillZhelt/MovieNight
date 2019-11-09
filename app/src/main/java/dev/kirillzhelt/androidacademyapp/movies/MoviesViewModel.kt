@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.kirillzhelt.androidacademyapp.dependencies.Dependencies
 import dev.kirillzhelt.androidacademyapp.model.Movie
 import dev.kirillzhelt.androidacademyapp.model.Repository
 import kotlinx.coroutines.Dispatchers
@@ -11,11 +12,13 @@ import kotlinx.coroutines.launch
 
 class MoviesViewModel: ViewModel() {
 
-    private val repository: Repository = Repository()
+    private val repository: Repository by lazy {
+        Dependencies.repository
+    }
 
-    private val _movies = MutableLiveData<ArrayList<Movie>>()
+    private val _movies = MutableLiveData<List<Movie>>()
 
-    val movies: LiveData<ArrayList<Movie>>
+    val movies: LiveData<List<Movie>>
         get() = _movies
 
     private val _currentMoviePosition = MutableLiveData<Int>()
@@ -36,7 +39,7 @@ class MoviesViewModel: ViewModel() {
     init {
 
         viewModelScope.launch(Dispatchers.IO) {
-            _movies.postValue(repository.loadMoviesFromNetwork())
+            _movies.postValue(repository.getPopularMovies())
 
             _loadingFinishEvent.postValue(true)
         }
