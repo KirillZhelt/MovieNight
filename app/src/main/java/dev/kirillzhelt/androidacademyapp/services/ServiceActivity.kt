@@ -1,5 +1,6 @@
 package dev.kirillzhelt.androidacademyapp.services
 
+import android.app.Service
 import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
@@ -12,8 +13,12 @@ import dev.kirillzhelt.androidacademyapp.R
 class ServiceActivity : AppCompatActivity() {
 
     private lateinit var progressTextView: TextView
+    private lateinit var startIntentService: Button
+    private lateinit var startService: Button
 
     private var backgroundProgressReceiver: BackgroundProgressReceiver? = null
+
+    private var runningServiceClass: Class<out Service>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,15 +26,25 @@ class ServiceActivity : AppCompatActivity() {
 
         progressTextView = findViewById(R.id.activity_service_progress_tv)
 
-        findViewById<Button>(R.id.activity_service_start_intent_service_btn).setOnClickListener {
-            Intent(this, HardJobIntentService::class.java).also { intent ->
-                startService(intent)
+        startIntentService = findViewById(R.id.activity_service_start_intent_service_btn)
+        startIntentService.setOnClickListener {
+            if (runningServiceClass == null) {
+                Intent(this, HardJobIntentService::class.java).also { intent ->
+                    startService(intent)
+                }
+
+                runningServiceClass = HardJobIntentService::class.java
             }
         }
 
-        findViewById<Button>(R.id.activity_service_start_service_btn).setOnClickListener {
-            Intent(this, HardJobService::class.java).also { intent ->
-                startService(intent)
+        startService = findViewById(R.id.activity_service_start_service_btn)
+        startService.setOnClickListener {
+            if (runningServiceClass == null) {
+                Intent(this, HardJobService::class.java).also { intent ->
+                    startService(intent)
+                }
+
+                runningServiceClass = HardJobService::class.java
             }
         }
     }
@@ -46,6 +61,8 @@ class ServiceActivity : AppCompatActivity() {
                 .unregisterReceiver(backgroundProgressReceiver!!)
         }
 
+        runningServiceClass = null
+
         super.onPause()
     }
 
@@ -53,6 +70,14 @@ class ServiceActivity : AppCompatActivity() {
         if (backgroundProgressReceiver == null) {
             backgroundProgressReceiver = BackgroundProgressReceiver { progress ->
                 progressTextView.text = progress.toString()
+
+                if (progress == 100) {
+                    Intent(this, runningServiceClass).also { intent ->
+                        stopService(intent)
+                    }
+
+                    runningServiceClass = null
+                }
             }
         }
 
