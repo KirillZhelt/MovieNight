@@ -1,10 +1,12 @@
 package dev.kirillzhelt.androidacademyapp.services
 
+import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import dev.kirillzhelt.androidacademyapp.R
 
 class ServiceActivity : AppCompatActivity() {
@@ -20,7 +22,9 @@ class ServiceActivity : AppCompatActivity() {
         progressTextView = findViewById(R.id.activity_service_progress_tv)
 
         findViewById<Button>(R.id.activity_service_start_intent_service_btn).setOnClickListener {
-
+            Intent(this, HardJobIntentService::class.java).also { intent ->
+                startService(intent)
+            }
         }
 
         findViewById<Button>(R.id.activity_service_start_service_btn).setOnClickListener {
@@ -50,6 +54,8 @@ class ServiceActivity : AppCompatActivity() {
         }
 
         val progressUpdateActionFilter = IntentFilter(BackgroundProgressReceiver.PROGRESS_UPDATE_ACTION)
-        registerReceiver(backgroundProgressReceiver, progressUpdateActionFilter)
+
+        LocalBroadcastManager.getInstance(applicationContext).registerReceiver(backgroundProgressReceiver!!,
+            progressUpdateActionFilter)
     }
 }

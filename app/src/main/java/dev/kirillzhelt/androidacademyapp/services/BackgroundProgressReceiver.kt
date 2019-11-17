@@ -3,6 +3,7 @@ package dev.kirillzhelt.androidacademyapp.services
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 
 class BackgroundProgressReceiver(val listener: (Int) -> Unit): BroadcastReceiver() {
 
@@ -16,6 +17,8 @@ class BackgroundProgressReceiver(val listener: (Int) -> Unit): BroadcastReceiver
 
     override fun onReceive(context: Context?, intent: Intent?) {
         val progress = intent?.getIntExtra(PROGRESS_VALUE_KEY, -1) ?: -1
+
+        Log.i("Progress", progress.toString())
 
         listener(progress)
     }
