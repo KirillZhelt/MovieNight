@@ -8,4 +8,7 @@
     <item
             android:id="@+id/menu_tasks_thread_handler_activity_itm"
             android:title="@string/open_thread_handler_activity" />
+    <item
+            android:id="@+id/menu_tasks_service_activity_itm"
+            android:title="@string/menu_background_service" />
 </menu>

@@ -35,7 +35,6 @@
     <string name="guardians_of_the_galaxy_description">he Guardians struggle to keep together as a team while dealing with their personal family issues, notably Star-Lord\'s encounter with his father the ambitious celestial being Ego.</string>
 
 
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="open_coroutines_activity">Open Coroutines Activity</string>
@@ -50,5 +49,6 @@
     <string name="not_running_err_msg">Task is not running</string>
     <string name="coroutines_title">Coroutines</string>
     <string name="thread_handler_title">ThreadHandler</string>
+    <string name="menu_background_service">Open Background Service Activity</string>
 
 </resources>

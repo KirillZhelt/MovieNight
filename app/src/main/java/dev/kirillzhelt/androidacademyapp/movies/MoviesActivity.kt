@@ -14,6 +14,7 @@ import dev.kirillzhelt.androidacademyapp.R
 import dev.kirillzhelt.androidacademyapp.details.DetailsSlidePagerFragment
 import dev.kirillzhelt.androidacademyapp.model.Movie
 import dev.kirillzhelt.androidacademyapp.model.Repository
+import dev.kirillzhelt.androidacademyapp.services.ServiceActivity
 import dev.kirillzhelt.androidacademyapp.tasks.TaskActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -69,6 +70,13 @@ class MoviesActivity : AppCompatActivity() {
                 val intent = Intent(this, TaskActivity::class.java)
                 intent.putExtra(TaskActivity.ARGS_TASK_TYPE, TaskActivity.ARGS_TASK_TYPE_THREAD_HANDLER)
 
+                startActivity(intent)
+
+                true
+            }
+
+            R.id.menu_tasks_service_activity_itm -> {
+                val intent = Intent(this, ServiceActivity::class.java)
                 startActivity(intent)
 
                 true
