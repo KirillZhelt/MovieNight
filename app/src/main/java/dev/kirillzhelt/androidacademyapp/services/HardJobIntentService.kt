@@ -7,15 +7,8 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 class HardJobIntentService: IntentService("HardJobIntentService") {
 
-    private var isDestroyed = false
-
     override fun onHandleIntent(intent: Intent?) {
-        isDestroyed = false
-
         for (i in 0..100) {
-            if (isDestroyed)
-                break
-
             SystemClock.sleep(100)
 
             val broadcastIntent = Intent(BackgroundProgressReceiver.PROGRESS_UPDATE_ACTION).apply {

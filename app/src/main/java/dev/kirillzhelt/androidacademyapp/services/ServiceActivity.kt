@@ -28,7 +28,9 @@ class ServiceActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.activity_service_start_service_btn).setOnClickListener {
-
+            Intent(this, HardJobService::class.java).also { intent ->
+                startService(intent)
+            }
         }
     }
 
@@ -40,7 +42,8 @@ class ServiceActivity : AppCompatActivity() {
 
     override fun onPause() {
         if (backgroundProgressReceiver != null) {
-            unregisterReceiver(backgroundProgressReceiver)
+            LocalBroadcastManager.getInstance(applicationContext)
+                .unregisterReceiver(backgroundProgressReceiver!!)
         }
 
         super.onPause()

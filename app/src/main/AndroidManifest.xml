@@ -23,6 +23,7 @@
         </activity>
 
         <service android:name=".services.HardJobIntentService" />
+        <service android:name=".services.HardJobService" />
 
     </application>
 
