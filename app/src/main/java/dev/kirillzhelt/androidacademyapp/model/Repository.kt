@@ -23,10 +23,14 @@ class Repository(private val moviesCache: MoviesCache, private val tmdbService: 
 
         val result = mutableListOf<Movie>()
         for ((index, movie) in popularMovies.withIndex()) {
+
+            val moviePosterUrl = movie.moviePosterURL?.let { IMAGES_BASE_URL + it } ?: "https://sgaconnections.com/wp-content/uploads/2018/09/s-l1000.jpg"
+            val movieBackgroundURL = movie.movieBackgroundURL?.let { IMAGES_BASE_URL + it } ?: "https://sgaconnections.com/wp-content/uploads/2018/09/s-l1000.jpg"
+
             result.add(Movie(
                 movie.movieId,
-                IMAGES_BASE_URL + movie.moviePosterURL,
-                IMAGES_BASE_URL + movie.movieBackgroundURL,
+                moviePosterUrl,
+                movieBackgroundURL,
                 movie.movieTitle,
                 movie.movieDescription,
                 VIDEOS_BASE_URL + moviesVideo[index],

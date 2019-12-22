@@ -9,10 +9,10 @@ data class TMDBMovie(
     val movieId: Int,
 
     @Json(name = "poster_path")
-    val moviePosterURL: String,
+    val moviePosterURL: String?,
 
     @Json(name = "backdrop_path")
-    val movieBackgroundURL: String,
+    val movieBackgroundURL: String?,
 
     @Json(name = "title")
     val movieTitle: String,

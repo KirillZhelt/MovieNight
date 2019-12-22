@@ -18,15 +18,18 @@
 
     <TextView
             android:id="@+id/movies_movie_title_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
-            android:text="@string/deadpool2_title"
+            android:layout_marginEnd="8dp"
             android:textColor="@android:color/black"
             android:textSize="@dimen/film_title_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/movies_movie_poster_iv"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="aaaaaaaaaaaaaaa" />
 
     <TextView
             android:id="@+id/movies_movie_description_tv"
